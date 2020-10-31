@@ -52,20 +52,23 @@ function reverseArray(arr) {
 }
 
 // 5) Create a function that based on given array returns new array in pattern [a,b,c,d,e,f] -> [a+b, c+d, e+f]    [1,3,4,1,0,3] => [4,5,3] function(array)=>array
+function transformPatternOne(arr) {
+  let resultArray = [];
+  for (let i = 0; i < arr.length; i += 2) {
+    resultArray.push(arr[i] + arr[i + 1]);
+  }
+  return resultArray;
+}
 // 6) For time of this example remove last element from the given array. Create a function that based on given array return new array in pattern [a,b,c,d,e] -> [a+b, c+d, e+e]
 
-function newArrayPatterCombo(arr) {
-  let returnArr = [];
-  for (let i = 0; i < arr.length; i += 2) {
-    let calculatedNumber;
-    if (arr[i + 1] != undefined) {
-      calculatedNumber = arr[i] + arr[i + 1];
-    } else {
-      calculatedNumber = arr[i] * 2;
-    }
-    returnArr.push(calculatedNumber);
+function transformPatternTwo(arr) {
+  let resultArray = [];
+  for (let i = 0; i < arr.length - 1; i += 2) {
+    resultArray.push(arr[i] + arr[i + 1]);
   }
-  return returnArr;
+  const lastElement = arr[arr.length - 1];
+  resultArray.push(lastElement * 2);
+  return resultArray;
 }
 
 // 7) Create a function the return one random element from given array. // use random function
@@ -78,39 +81,28 @@ function returnRandom(arr) {
 // 8) Create a function that takes two parameters: array and number off attempts. Based on number of attempts choose a random number from table that many times and return lowest one.
 
 function returnLowestRandom(arr, attempts) {
-  let randomNumbers = [];
+  let lowest = null;
   for (let i = 0; i < attempts; i++) {
-    randomNumbers.push(returnRandom(arr));
-  }
-  let lowest = randomNumbers[0];
-  for (let i = 1; i < randomNumbers.length; i++) {
-    if (randomNumbers[i] < lowest) {
-      lowest = randomNumbers[i];
+    const currentNumber = returnRandom(arr);
+    if (lowest == null || currNumber < lowest) {
+      lowest = currentNumber;
     }
   }
   return lowest;
 }
 
-function returnLowestRandom2(arr, attempts) {
-  let randomNumbers = [];
-  for (let i = 0; i < attempts; i++) {
-    randomNumbers.push(returnRandom(arr));
-  }
-  return randomNumbers.reduce((acc, number) => (number < acc ? number : acc));
-}
-
 // 9) Create a function that takes given array. Then takes a random element, removes it from the array and pushes it to result arrays. This takes place as long as there are elements in source array.
 
 function rearrange(arr) {
-  let arrCopy = [...arr];
-  let randomArray = [];
-  while (arrCopy.length > 0) {
-    const randomElement = returnRandom(arrCopy);
-    const randomsIndex = arrCopy.indexOf(randomElement);
-    arrCopy.splice(randomsIndex, 1);
-    randomArray.push(randomElement);
+  let arrayCopy = [...arr];
+  let resultArray = [];
+  while (arrayCopy.length > 0) {
+    const randomElement = returnRandom(arrayCopy);
+    const randomsIndex = arrayCopy.indexOf(randomElement);
+    arrayCopy.splice(randomsIndex, 1);
+    resultArray.push(randomElement);
   }
-  return randomArray;
+  return resultArray;
 }
 
 // 10) Create a function that on given array will perform operation of adding or subtracting elements. Operation is to be chosen at random. And return a result.[a,b,c,d] =>(((a+-b)+-c)+-d)
@@ -118,7 +110,7 @@ function rearrange(arr) {
 function performRandomOp(arr) {
   let accumulator = 0;
   for (let i = 0; i < arr.length; i++) {
-    if (Math.random() * 2 > 1) {
+    if (Math.random() * 2 >= 1) {
       accumulator += arr[i];
     } else {
       accumulator -= arr[i];
@@ -154,7 +146,7 @@ function returnPolishDay() {
 function calcDaysToFriday() {
   const today = new Date().getDay();
   const diff = 5 - today;
-  return diff >= 0 ? diff : 7 + diff;
+  return diff >= 0 ? diff : diff + 7;
 }
 
 // 13) Create a function that take two numbers and return the object with 4 fields. Result on 4 basic arithmetic operations.
@@ -178,13 +170,9 @@ console.log(`4) Reversed array: ${reverseArray(testArr1)}`);
 console.log(`5) 6) Array Pattern 1: ${newArrayPatterCombo(testArr1)}
                    Array Pattern 2: ${newArrayPatterCombo(testArr2)}`);
 console.log(`7) Random array element: ${returnRandom(testArr1)}`);
-console.log(
-  `8) Lowest number from 3 random elements: ${returnLowestRandom(testArr1, 3)}`
-);
+console.log(`8) Lowest number from 3 random elements: ${returnLowestRandom(testArr1, 3)}`);
 console.log(`9) Array randomly rearranged: ${rearrange(testArr1)}`);
-console.log(
-  `10) Result of random +/- calculatoion: ${performRandomOp(testArr1)}`
-);
+console.log(`10) Result of random +/- calculatoion: ${performRandomOp(testArr1)}`);
 console.log(`11) Today in Polish is: ${returnPolishDay()}`);
 console.log(`12) Days left till Friday: ${calcDaysToFriday()}`);
 const calculator = getCalculateObj(10, 5);
