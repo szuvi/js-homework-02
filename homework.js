@@ -4,9 +4,12 @@
 
 // ARRAY: [1,6,23,8,4,8,3,7]
 
+const testArr1 = [1, 6, 23, 8, 4, 8, 3, 7];
+const testArr2 = [1, 6, 23, 8, 4, 8, 3];
+
 // 1) Create a function that returns the sum of all elements passed in array as parameter. Function (array)=>number
 
-function calculateSumofArray(arr) {
+function calcSumOfElements(arr) {
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
@@ -14,15 +17,19 @@ function calculateSumofArray(arr) {
   return sum;
 }
 
-function calculateSumofArray2(arr) {
+function calcSumOfElements2(arr) {
   return arr.reduce((acc, number) => (acc += number));
 }
+
+console.log(`1) Sum of array is - ${calcSumOfElements(testArr1)}`);
 
 // 2) Create a function that returns sum of first and last elements of given array.
 
 function sumOfFirstLast(arr) {
   return arr[0] + arr[arr.length - 1];
 }
+
+console.log(`2) Sum of first and last element is: ${sumOfFirstLast(testArr1)}`);
 
 // 3) Create a function that takes a number and return factorial of that number.
 
@@ -41,6 +48,9 @@ function factorialRecursion(n) {
     return factorial(n - 2) * factorial(n - 1);
   }
 }
+
+console.log(`3) Factorial of n = 9 is: ${factorialLoop(9)}`);
+
 // 4) Create a function that returns given array in reverse order. // no build in functions 
 
 function reverseArray(arr) {
@@ -51,6 +61,8 @@ function reverseArray(arr) {
   return returnArr;
 }
 
+console.log(`4) Reversed array: ${reverseArray(testArr1)}`);
+
 // 5) Create a function that based on given array returns new array in pattern [a,b,c,d,e,f] -> [a+b, c+d, e+f]    [1,3,4,1,0,3] => [4,5,3] function(array)=>array
 function transformPatternOne(arr) {
   let resultArray = [];
@@ -59,6 +71,9 @@ function transformPatternOne(arr) {
   }
   return resultArray;
 }
+
+console.log(`5) Array Pattern 1: ${transformPatternOne(testArr1)}`);
+
 // 6) For time of this example remove last element from the given array. Create a function that based on given array return new array in pattern [a,b,c,d,e] -> [a+b, c+d, e+e]
 
 function transformPatternTwo(arr) {
@@ -71,6 +86,8 @@ function transformPatternTwo(arr) {
   return resultArray;
 }
 
+console.log(`6) Array Pattern 2: ${transformPatternTwo(testArr1)}`);
+
 // 7) Create a function the return one random element from given array. // use random function
 
 function returnRandom(arr) {
@@ -78,18 +95,22 @@ function returnRandom(arr) {
   return arr[index];
 }
 
+console.log(`7) Random array element: ${returnRandom(testArr1)}`);
+
 // 8) Create a function that takes two parameters: array and number off attempts. Based on number of attempts choose a random number from table that many times and return lowest one.
 
 function returnLowestRandom(arr, attempts) {
   let lowest = null;
   for (let i = 0; i < attempts; i++) {
     const currentNumber = returnRandom(arr);
-    if (lowest == null || currNumber < lowest) {
+    if (lowest == null || currentNumber < lowest) {
       lowest = currentNumber;
     }
   }
   return lowest;
 }
+
+console.log(`8) Lowest number from 3 random elements: ${returnLowestRandom(testArr1, 3)}`);
 
 // 9) Create a function that takes given array. Then takes a random element, removes it from the array and pushes it to result arrays. This takes place as long as there are elements in source array.
 
@@ -104,6 +125,8 @@ function rearrange(arr) {
   }
   return resultArray;
 }
+
+console.log(`9) Array randomly rearranged: ${rearrange(testArr1)}`);
 
 // 10) Create a function that on given array will perform operation of adding or subtracting elements. Operation is to be chosen at random. And return a result.[a,b,c,d] =>(((a+-b)+-c)+-d)
 
@@ -125,6 +148,8 @@ function perfomRandomOp2(arr) {
   );
 }
 
+console.log(`10) Result of random +/- calculatoion: ${performRandomOp(testArr1)}`);
+
 // 11) Create a function that will return the current day name in Polish.
 
 function returnPolishDay() {
@@ -141,6 +166,8 @@ function returnPolishDay() {
   return daysInPolish[index];
 }
 
+console.log(`11) Today in Polish is: ${returnPolishDay()}`);
+
 // 12) Create a function that tells us how many days till Friday 
 
 function calcDaysToFriday() {
@@ -148,6 +175,8 @@ function calcDaysToFriday() {
   const diff = 5 - today;
   return diff >= 0 ? diff : diff + 7;
 }
+
+console.log(`12) Days left till Friday: ${calcDaysToFriday()}`);
 
 // 13) Create a function that take two numbers and return the object with 4 fields. Result on 4 basic arithmetic operations.
 
@@ -160,21 +189,6 @@ function getCalculateObj(x, y) {
   };
 }
 
-// TEST CASES:
-const testArr1 = [1, 6, 23, 8, 4, 8, 3, 7];
-const testArr2 = [1, 6, 23, 8, 4, 8, 3];
-console.log(`1) Sum of array is - ${calculateSumofArray(testArr1)}`);
-console.log(`2) Sum of first and last element is: ${sumOfFirstLast(testArr1)}`);
-console.log(`3) Factorial of n = 9 is: ${factorialLoop(9)}`);
-console.log(`4) Reversed array: ${reverseArray(testArr1)}`);
-console.log(`5) 6) Array Pattern 1: ${newArrayPatterCombo(testArr1)}
-                   Array Pattern 2: ${newArrayPatterCombo(testArr2)}`);
-console.log(`7) Random array element: ${returnRandom(testArr1)}`);
-console.log(`8) Lowest number from 3 random elements: ${returnLowestRandom(testArr1, 3)}`);
-console.log(`9) Array randomly rearranged: ${rearrange(testArr1)}`);
-console.log(`10) Result of random +/- calculatoion: ${performRandomOp(testArr1)}`);
-console.log(`11) Today in Polish is: ${returnPolishDay()}`);
-console.log(`12) Days left till Friday: ${calcDaysToFriday()}`);
 const calculator = getCalculateObj(10, 5);
 console.log(`13) Calculate obj is:`);
 for (const key in calculator) {
